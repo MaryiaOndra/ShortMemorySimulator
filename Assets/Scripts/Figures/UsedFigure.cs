@@ -17,27 +17,24 @@ public class UsedFigure : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Start()
-    {
-        do
-        {
-            rigidbody.AddForce(Vector3.left * Time.deltaTime);
-        }
-        while (transform.position.x != 0);        
-    }
-
     private void Update()
     {
-        //if (transform.position.x != 0)
-        //{
-        //    rigidbody.AddForce(Vector3.left * speed * Time.deltaTime);
-        //}
+        MoveToMiddlePoint();
 
         if (transform.position.y < -5)
         {
             Deactivate();
             ResetPosition();
         }
+    }
+
+    private void MoveToMiddlePoint() 
+    {
+        do
+        {
+            rigidbody.AddForce(Vector3.left * Time.deltaTime);
+        }
+        while (transform.position.x != 0);
     }
 
     public void Activate() 
