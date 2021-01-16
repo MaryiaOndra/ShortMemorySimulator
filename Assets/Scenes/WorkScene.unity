@@ -150,8 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc6a9bd1681a3b4b997893f57634f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usedPrefabs: []
-  figureMesh: {fileID: 0}
+  usedPrefabs:
+  - {fileID: 516712851602724064, guid: 4c4d8a5553afc09438fc65ab336565cb, type: 3}
+  - {fileID: 6133875631093227396, guid: 3639349e37fb167499f97b31e29a1897, type: 3}
+  - {fileID: 1130749693274376159, guid: ea458c57dd3735f4683c8e6332b6055c, type: 3}
+  material: {fileID: 2100000, guid: a5ab27f24d140594197755b8c9ee7179, type: 2}
 --- !u!4 &90073613
 Transform:
   m_ObjectHideFlags: 0
@@ -606,12 +609,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 100
-    m_Right: 100
-    m_Top: 0
-    m_Bottom: 100
+    m_Left: 50
+    m_Right: 50
+    m_Top: 50
+    m_Bottom: 50
   m_ChildAlignment: 6
-  m_Spacing: 100
+  m_Spacing: 50
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
