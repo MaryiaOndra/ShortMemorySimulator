@@ -10,18 +10,23 @@ public class UsedFigure : MonoBehaviour
     public float rotation { get; set; }
 
     private Rigidbody rigidbody;
-    private float speed = 0.02f;
+    private float speed = 100f; 
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        MoveToMiddlePoint();
+        Debug.Log("UpdateRB" + rigidbody.position.x);
 
-        if (transform.position.y < -5)
+        if(rigidbody.position.x > 0)
+        {
+            rigidbody.AddForce(Vector3.left * Time.deltaTime * speed, ForceMode.Force);
+        }
+        
+        if (rigidbody.position.y < -5)
         {
             Deactivate();
             ResetPosition();
@@ -30,16 +35,17 @@ public class UsedFigure : MonoBehaviour
 
     private void MoveToMiddlePoint() 
     {
-        do
+        if (rigidbody.position.x >= 0)
         {
-            rigidbody.AddForce(Vector3.left * Time.deltaTime);
+            rigidbody.AddForce(Vector3.left * Time.deltaTime * speed, ForceMode.Force);
+            Debug.Log(rigidbody.position);
         }
-        while (transform.position.x != 0);
     }
 
     public void Activate() 
     {
         gameObject.SetActive(true);
+        Debug.Log("Activate" + rigidbody.position);
     }
 
     public void DropDown() 

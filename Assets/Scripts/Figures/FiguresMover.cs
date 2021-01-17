@@ -22,10 +22,10 @@ public class FiguresMover : MonoBehaviour
 
     private void Start()
     {
-        SetRandomPrefab();
+        ActivateRandomPrefab();
     }
 
-    public void SetRandomPrefab() 
+    public void ActivateRandomPrefab() 
     {
         randomNumbr = Random.Range(0, usedPrefabs.Length);
         workPrefabs[randomNumbr].Activate();
