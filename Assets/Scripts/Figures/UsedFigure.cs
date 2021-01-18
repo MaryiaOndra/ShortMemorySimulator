@@ -2,66 +2,76 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof (Rigidbody))]
 public class UsedFigure : MonoBehaviour
 {
-    public Color color { get; set; }
-    public GameObject prefab { get; set; }
-    public float rotation { get; set; }
+    private float speedFlt = 2f;
+    private MeshRenderer meshRenderer;
+    private int[] rotationAngles = { 0, 30, 60, 70, 150, 168 };
 
-    private Rigidbody rigidbody;
-    private float speed = 100f; 
+    public int AngleInt { get; private set; }
+    public int ColorInt { get; private set; }
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        meshRenderer = gameObject.GetComponent<MeshRenderer>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        Debug.Log("UpdateRB" + rigidbody.position.x);
-
-        if(rigidbody.position.x > 0)
+        if (gameObject.activeSelf) 
         {
-            rigidbody.AddForce(Vector3.left * Time.deltaTime * speed, ForceMode.Force);
-        }
-        
-        if (rigidbody.position.y < -5)
-        {
-            Deactivate();
-            ResetPosition();
+            MoveToTheMiddle();
         }
     }
 
-    private void MoveToMiddlePoint() 
+    private void MoveToTheMiddle() 
     {
-        if (rigidbody.position.x >= 0)
+        transform.position = Vector3.MoveTowards(transform.position, Vector3.zero, Time.deltaTime * speedFlt);
+    }
+
+    public void SetRandomColor()
+    {
+       int colorInt = Random.Range((int)FigureColors.White, (int)FigureColors.Red);
+       ColorInt = colorInt;
+
+        switch (colorInt)
         {
-            rigidbody.AddForce(Vector3.left * Time.deltaTime * speed, ForceMode.Force);
-            Debug.Log(rigidbody.position);
+            case (int)FigureColors.Cyan:
+                meshRenderer.material.color = Color.cyan;
+                break; 
+            case (int)FigureColors.Green:
+                meshRenderer.material.color = Color.green;
+                break; 
+            case (int)FigureColors.Red:
+                meshRenderer.material.color = Color.red;
+                break; 
+            case (int)FigureColors.White:
+                meshRenderer.material.color = Color.white;
+                break;       
+            case (int)FigureColors.Blue:
+                meshRenderer.material.color = Color.blue;
+                break;           
+            case (int)FigureColors.Yellow:
+                meshRenderer.material.color = Color.yellow;
+                break;
         }
     }
 
-    public void Activate() 
+    public void SetRandomRotation()
     {
-        gameObject.SetActive(true);
-        Debug.Log("Activate" + rigidbody.position);
-    }
 
-    public void DropDown() 
-    {
-        rigidbody.isKinematic = false;
-        rigidbody.useGravity = true;
+        int randomAngle = Random.Range(0, rotationAngles.Length);
+        transform.Rotate(Vector3.forward, rotationAngles[randomAngle]);
+        AngleInt = randomAngle;
     }
+}
 
-    public void Deactivate()
-    {
-        gameObject.SetActive(false);
-    }
-
-
-    public void ResetPosition() 
-    {
-        transform.position = transform.parent.position;
-    }
+enum FigureColors
+{
+    White,
+    Cyan, 
+    Blue,
+    Green, 
+    Yellow,
+    Red
 }
