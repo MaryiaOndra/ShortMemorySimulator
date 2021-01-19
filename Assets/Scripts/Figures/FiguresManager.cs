@@ -14,8 +14,10 @@ public class FiguresManager : MonoBehaviour
     private int savedPrefabNmbrInt;
     private int savedPrefabAngleInt;
     private int savedPrefabColorInt;
-    private int answerCounterInt;
     private int figureCounterInt;
+
+    public int AnswerCounterInt { get; private set; }
+    public UsedFigure WorkPrefab => workPrefabs[randomPrefabNmb];
 
     private void Start()
     {
@@ -31,7 +33,6 @@ public class FiguresManager : MonoBehaviour
 
     private void ActivateNewPrefab() 
     {
-        answerCounterInt = 0;
         figureCounterInt++;
 
         randomPrefabNmb = Random.Range(0, usedPrefabs.Length);
@@ -80,10 +81,14 @@ public class FiguresManager : MonoBehaviour
 
     private void CalculateResult() 
     {
+        AnswerCounterInt = 0;
+
         foreach (var answer in comparedAnswers)
         {
             if (answer == true)
-                answerCounterInt++;
+                AnswerCounterInt++;
         }
+
+        Debug.Log("CALCULATED ANSWER: " + AnswerCounterInt);
     }
 }
